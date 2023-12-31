@@ -18,7 +18,7 @@ struct IPAViewApp: App {
             
             CommandGroup(replacing: .help) {
                 Button {
-                    Utils.openURL("https://github.com/IPAView/IPAView/issues")
+                    Utils.openURL("https://github.com/IPAView/ipaview.github.io/issues")
                 } label: {
                     Label("IPAView Help", image: "help")
                 }

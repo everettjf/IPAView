@@ -40,6 +40,7 @@ struct RecentFilesView: View {
         
         // not exist
         recentFileManager.removeFile(filePath: url.path())
+
     
     
     }

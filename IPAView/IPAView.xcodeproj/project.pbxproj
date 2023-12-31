@@ -42,6 +42,7 @@
 		D18C36522B410E6C00E5A3D4 /* InspectorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorManager.swift; sourceTree = "<group>"; };
 		D18C36542B411EC700E5A3D4 /* InspectItemInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectItemInfo.swift; sourceTree = "<group>"; };
 		D18C36572B41222200E5A3D4 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		D18C36592B41347800E5A3D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D1D73E372B37E17C00F6FEBE /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		D1D73E392B37E19300F6FEBE /* FileItemInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileItemInfo.swift; sourceTree = "<group>"; };
 		D1D73E3B2B386F1600F6FEBE /* UnzipManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnzipManager.swift; sourceTree = "<group>"; };
@@ -131,6 +132,7 @@
 		D1E580882B37179E002CC9B4 /* IPAView */ = {
 			isa = PBXGroup;
 			children = (
+				D18C36592B41347800E5A3D4 /* Info.plist */,
 				D18C36562B41220D00E5A3D4 /* Utils */,
 				D18C363F2B3EF20D00E5A3D4 /* Model */,
 				D18C36412B3EF21C00E5A3D4 /* Controller */,
@@ -377,12 +379,13 @@
 				CODE_SIGN_ENTITLEMENTS = IPAView/IPAView.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"IPAView/Preview Content\"";
 				DEVELOPMENT_TEAM = YPV49M8592;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = IPAView/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -406,12 +409,13 @@
 				CODE_SIGN_ENTITLEMENTS = IPAView/IPAView.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"IPAView/Preview Content\"";
 				DEVELOPMENT_TEAM = YPV49M8592;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = IPAView/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
