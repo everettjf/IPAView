@@ -29,6 +29,15 @@ class InspectorManager {
         }
 
         for case let fileURL as URL in enumerator {
+            if fileCount > 100000 {
+                return [InspectItemInfo(name: "Error", value: "file count more than 100000")]
+            }
+            
+            if directoryCount > 100000 {
+                return [InspectItemInfo(name: "Error", value: "directory count more than 100000")]
+            }
+            
+            
             guard let resourceValues = try? fileURL.resourceValues(forKeys: Set(keys)) else { continue }
 
             if resourceValues.isDirectory == true {

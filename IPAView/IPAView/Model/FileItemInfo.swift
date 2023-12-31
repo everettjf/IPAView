@@ -22,4 +22,11 @@ struct FileItemInfo: Identifiable {
     var formattedSize: String {
         ByteCountFormatter.string(fromByteCount: size, countStyle: .file)
     }
+    
+    var systemImage: String {
+        if directory {
+            return "folder"
+        }
+        return "doc"
+    }
 }

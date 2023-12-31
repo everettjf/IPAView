@@ -30,6 +30,10 @@ struct DetailView: View {
     
     var content: some View {
         Table(sharedModel.fileSearchResults, selection: $sharedModel.selectedFiles) {
+            TableColumn("Icon") { item in
+                Image(systemName: item.systemImage)
+            }
+            .width(30)
             TableColumn("Name", value: \.name)
                 .width(min: 100, ideal: 200)
             TableColumn("Type", value: \.type)
