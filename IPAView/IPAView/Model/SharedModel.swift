@@ -27,6 +27,15 @@ class SharedModel: ObservableObject {
     @Published var selectedFiles = Set<FileItemInfo.ID>()
     @Published var fileSearchText = ""
     @Published var currentPath: URL = URL(filePath: "")
+    var fileSearchResults: [FileItemInfo] {
+        if fileSearchText.isEmpty {
+            return files
+        }
+        
+        return files.filter { file in
+            return file.name.lowercased().contains(fileSearchText.lowercased())
+        }
+    }
     
     // inspector
     @Published var showInspector = false

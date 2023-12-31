@@ -29,7 +29,7 @@ struct DetailView: View {
     }
     
     var content: some View {
-        Table(sharedModel.files, selection: $sharedModel.selectedFiles) {
+        Table(sharedModel.fileSearchResults, selection: $sharedModel.selectedFiles) {
             TableColumn("Name", value: \.name)
                 .width(min: 100, ideal: 200)
             TableColumn("Type", value: \.type)
