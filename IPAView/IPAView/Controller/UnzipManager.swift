@@ -14,7 +14,7 @@ class UnzipManager : NSObject {
 
 
     func getUnzipDirectory()-> URL {
-        let dir = Utils.getDocumentsDirectory().appending(path: "Cache")
+        let dir = Utils.getCacheDirectory()
         if !Utils.directoryExists(at: dir) {
             try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
         }

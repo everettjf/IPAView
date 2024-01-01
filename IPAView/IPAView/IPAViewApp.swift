@@ -15,6 +15,12 @@ struct IPAViewApp: App {
             ContentView()
         }
         .commands {
+            CommandGroup(after: .newItem) {
+                Button("Open Cache") {
+                    let dir = Utils.getCacheDirectory()
+                    Utils.revealInFinder(fileURL: dir)
+                }
+            }
             CommandGroup(replacing: .help) {
                 Button("IPAView Help") {
                     Utils.openURL("https://ipaview.github.io/")

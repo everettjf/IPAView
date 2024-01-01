@@ -82,6 +82,11 @@ class Utils {
         return paths[0]
     }
     
+    static func getCacheDirectory() -> URL {
+        let dir = Utils.getDocumentsDirectory().appending(path: "CacheDirectory")
+        return dir
+    }
+    
     
     static func revealInFinder(fileURL: URL) {
         NSWorkspace.shared.selectFile(fileURL.path, inFileViewerRootedAtPath: "")
