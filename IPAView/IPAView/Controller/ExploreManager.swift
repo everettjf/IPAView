@@ -32,6 +32,12 @@ class ExploreManager {
             if Utils.isURLDirectory(url: frameworkPath) {
                 items.append(SidebarItemInfo(name: "Frameworks", path: frameworkPath, directory: true))
             }
+            
+            // PlugIns
+            let PlugInsPath = appPath.appending(path: "PlugIns")
+            if Utils.isURLDirectory(url: PlugInsPath) {
+                items.append(SidebarItemInfo(name: "PlugIns", path: PlugInsPath, directory: true))
+            }
         }
         
         return items
