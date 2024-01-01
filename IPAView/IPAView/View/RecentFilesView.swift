@@ -11,12 +11,15 @@ struct RecentFilesView: View {
     @EnvironmentObject var sharedModel: SharedModel
     
     var body: some View {
-        List(recentFileManager.getRecentFiles(), id: \.self) { filePath in
+        List(sharedModel.recentFiles, id: \.self) { filePath in
             Text(filePath)
                 .onTapGesture {
                     handleFileTap(filePath)
                 }
         }
+        .onAppear(perform: {
+            sharedModel.loadRecentFiles()
+        })
     }
     
     private func handleFileTap(_ filePath: String) {
@@ -28,21 +31,21 @@ struct RecentFilesView: View {
         
         if Utils.directoryExists(at: url) {
             sharedModel.loadInitialPath(dir: url)
-            recentFileManager.addFile(filePath: url.path())
+            recentFileManager.addFile(filePath: url.path(percentEncoded: false))
             return
         }
         
         if Utils.fileExists(at: url) {
             sharedModel.unzipFile(at: url)
-            recentFileManager.addFile(filePath: url.path())
+            recentFileManager.addFile(filePath: url.path(percentEncoded: false))
             return
         }
         
         // not exist
-        recentFileManager.removeFile(filePath: url.path())
-
-    
-    
+        print("file not existed : \(filePath)")
+        recentFileManager.removeFile(filePath: filePath)
+        
+        sharedModel.showToastMessage("File not existed : \(filePath)")
     }
 }
 

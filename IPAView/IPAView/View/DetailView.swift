@@ -60,6 +60,22 @@ struct DetailView: View {
                 Button("Search with Baidu") {
                     sharedModel.searchFileName(fileID: items.first!, engine: "baidu")
                 }
+                
+                Button {
+                    sharedModel.copyFileItemInfoToPasteboard(fileID: items.first!, field: "relative-path")
+                } label: {
+                    Text("Copy Relative Path")
+                }
+                Button {
+                    sharedModel.copyFileItemInfoToPasteboard(fileID: items.first!, field: "full-path")
+                } label: {
+                    Text("Copy Full Path")
+                }
+                Button {
+                    sharedModel.copyFileItemInfoToPasteboard(fileID: items.first!, field: "file-name")
+                } label: {
+                    Text("Copy File Name")
+                }
             }
         }) { items in
             print("double click")

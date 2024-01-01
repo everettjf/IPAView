@@ -40,7 +40,7 @@ class ExploreManager {
     static func listFiles(path: URL) -> [FileItemInfo]{
         let fileManager = FileManager.default
         do {
-            let items = try fileManager.contentsOfDirectory(atPath: path.path())
+            let items = try fileManager.contentsOfDirectory(atPath: path.path(percentEncoded: false))
             print("items : \(items)")
             var files = try items.compactMap { filename -> FileItemInfo? in
                 if filename == ".DS_Store" {
@@ -49,7 +49,7 @@ class ExploreManager {
                 
                 let fullPath = path.appending(path: filename)
                 var isDir: ObjCBool = false
-                guard fileManager.fileExists(atPath: fullPath.path(), isDirectory: &isDir) else {
+                guard fileManager.fileExists(atPath: fullPath.path(percentEncoded: false), isDirectory: &isDir) else {
                     return nil
                 }
                 // macho
@@ -59,7 +59,7 @@ class ExploreManager {
                 }
                 
                 // attributes
-                let attributes = try fileManager.attributesOfItem(atPath: fullPath.path())
+                let attributes = try fileManager.attributesOfItem(atPath: fullPath.path(percentEncoded: false))
                 let fileSize = attributes[.size] as? Int64 ?? 0
                 let fileDescription = ""
                 

@@ -41,7 +41,8 @@ struct FileSystemNavigationBarPathComponentView: View {
 }
 
 struct NavigationBarView: View {
-    
+    @EnvironmentObject var sharedModel: SharedModel
+
     struct Item : Identifiable{
         let id = UUID()
         let name: String
@@ -71,7 +72,7 @@ struct NavigationBarView: View {
             current = current.deletingLastPathComponent()
             currentName = current.lastPathComponent
             
-            if path.path().trimmingCharacters(in: CharacterSet(charactersIn: "/")) == rootUrl.path().trimmingCharacters(in: CharacterSet(charactersIn: "/")) {
+            if path.path(percentEncoded: false).trimmingCharacters(in: CharacterSet(charactersIn: "/")) == rootUrl.path(percentEncoded: false).trimmingCharacters(in: CharacterSet(charactersIn: "/")) {
                 break;
             }
         }
@@ -94,21 +95,20 @@ struct NavigationBarView: View {
                                 Text("Reveal in Finder")
                             }
                             Button {
-                                
+                                sharedModel.copyFileItemInfoToPasteboard(path: item.path, field: "relative-path")
                             } label: {
                                 Text("Copy Relative Path")
                             }
                             Button {
-                                
+                                sharedModel.copyFileItemInfoToPasteboard(path: item.path, field: "full-path")
                             } label: {
                                 Text("Copy Full Path")
                             }
                             Button {
-                                
+                                sharedModel.copyFileItemInfoToPasteboard(path: item.path, field: "file-name")
                             } label: {
                                 Text("Copy Name")
                             }
-                            
                         }
                     }
                 }

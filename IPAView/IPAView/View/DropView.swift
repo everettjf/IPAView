@@ -61,13 +61,13 @@ struct DropView: View {
     private func unzipFile(fileURL : URL) {
         sharedModel.unzipFile(at: fileURL)
         
-        recentFileManager.addFile(filePath: fileURL.path())
+        recentFileManager.addFile(filePath: fileURL.path(percentEncoded: false))
     }
     
     private func loadDir(dir: URL) {
         sharedModel.loadInitialPath(dir: dir)
 
-        recentFileManager.addFile(filePath: dir.path())
+        recentFileManager.addFile(filePath: dir.path(percentEncoded: false))
     }
     
     private func handleFileDrop(providers: [NSItemProvider]) {

@@ -27,6 +27,7 @@ class SharedModel: ObservableObject {
     @Published var selectedFiles = Set<FileItemInfo.ID>()
     @Published var fileSearchText = ""
     @Published var currentPath: URL = URL(filePath: "")
+    
     var fileSearchResults: [FileItemInfo] {
         if fileSearchText.isEmpty {
             return files
@@ -42,6 +43,9 @@ class SharedModel: ObservableObject {
     @Published var inspectItems: [InspectItemInfo] = []
     @Published var selectedInspectItems = Set<InspectItemInfo.ID>()
     
+    // recent files
+    @Published var recentFiles: [String] = []
+    
     // for the initial root url
     var rootUrl: URL = URL(filePath: "")
     
@@ -49,13 +53,13 @@ class SharedModel: ObservableObject {
     func loadInitialPath(dir: URL) {
         DispatchQueue.main.async {
             print("load path : \(dir)")
-            self.listInitialFiles(atPath: dir.path())
+            self.listInitialFiles(path: dir)
         }
     }
     
-    private func listInitialFiles(atPath path: String) {
+    private func listInitialFiles(path: URL) {
         // items
-        self.rootUrl = URL(filePath: path)
+        self.rootUrl = path
         items = ExploreManager.listKeyItems(path: rootUrl)
         // select the app
         let appItemId = items.first { $0.name.hasSuffix(".app")}?.id
@@ -122,6 +126,37 @@ class SharedModel: ObservableObject {
         Utils.searchWithDefaultBrowser(query: file.name, searchEngine: engine)
     }
     
+    
+    func copyFileItemInfoToPasteboard(fileID: FileItemInfo.ID, field: String) {
+        let file = self.files.first {$0.id == fileID}
+        guard let file = file else {
+            return
+        }
+        copyFileItemInfoToPasteboard(path: file.path, field: field)
+    }
+    
+    func copyFileItemInfoToPasteboard(path: URL, field: String) {
+        switch field {
+        case "relative-path":
+            let root = rootUrl.path(percentEncoded: false)
+            let relativePath = path.path(percentEncoded: false).replacingOccurrences(of: root, with: "")
+            print("relative path = \(relativePath)")
+            Utils.copyToPasteboard(string: relativePath)
+            showToastMessage("Relative path copied : \(relativePath)")
+        case "full-path":
+            let path = path.path(percentEncoded: false)
+            Utils.copyToPasteboard(string: path)
+            showToastMessage("Full path copied : \(path)")
+        case "file-name":
+            let name = path.lastPathComponent
+            Utils.copyToPasteboard(string: name)
+            showToastMessage("File name copied : \(name)")
+        default:
+            print("unknown field : \(field)")
+        }
+    }
+    
+    
     func openFile(fileID: FileItemInfo.ID) {
         let file = self.files.first {$0.id == fileID}
         guard let file = file else {
@@ -159,8 +194,8 @@ class SharedModel: ObservableObject {
                 self?.unzipExecuting = false
                 switch result {
                 case .success(let directoryURL):
-                    self?.unzipStatus = "Extracted to: \(directoryURL.path)"
-                    self?.listInitialFiles(atPath: directoryURL.path())
+                    self?.unzipStatus = "Extracted to: \(directoryURL.path(percentEncoded: false))"
+                    self?.listInitialFiles(path: directoryURL)
                 case .failure(let error):
                     self?.unzipStatus = "Error: \(error.localizedDescription)"
                 }
@@ -183,5 +218,9 @@ class SharedModel: ObservableObject {
             }
         }
         
+    }
+    
+    func loadRecentFiles() {
+        recentFiles = recentFileManager.getRecentFiles()
     }
 }

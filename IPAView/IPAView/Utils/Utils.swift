@@ -27,14 +27,14 @@ class Utils {
     }
     
     static func directoryExists(at url: URL) -> Bool {
-        let path = url.path
+        let path = url.path(percentEncoded: false)
         var isDir: ObjCBool = false
         let exists = FileManager.default.fileExists(atPath: path, isDirectory: &isDir)
         return exists && isDir.boolValue
     }
     
     static func fileExists(at url: URL) -> Bool {
-        let path = url.path
+        let path = url.path(percentEncoded: false)
         var isDir: ObjCBool = false
         let exists = FileManager.default.fileExists(atPath: path, isDirectory: &isDir)
         return exists && !isDir.boolValue
@@ -44,13 +44,13 @@ class Utils {
     static func findFirstAppDirectory(at path: URL) -> URL? {
         let fileManager = FileManager.default
         do {
-            let items = try fileManager.contentsOfDirectory(atPath: path.path())
+            let items = try fileManager.contentsOfDirectory(atPath: path.path(percentEncoded: false))
 
             for item in items {
                 let fullPath = path.appending(path: item)
                 var isDir: ObjCBool = false
 
-                if fileManager.fileExists(atPath: fullPath.path(), isDirectory: &isDir),
+                if fileManager.fileExists(atPath: fullPath.path(percentEncoded: false), isDirectory: &isDir),
                    isDir.boolValue,
                    item.hasSuffix(".app") {
                     return fullPath

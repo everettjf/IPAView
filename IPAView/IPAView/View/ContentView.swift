@@ -67,8 +67,7 @@ struct ContentView: View {
     private func showFeedback() {
         // Your feedback action here
         print("Feedback button tapped")
-        
-        Utils.openURL("https://github.com/IPAView/ipaview.github.io/issues")
+        Utils.openURL("https://ipaview.github.io/")
     }
     
     private func showInspector() {
