@@ -223,4 +223,9 @@ class SharedModel: ObservableObject {
     func loadRecentFiles() {
         recentFiles = recentFileManager.getRecentFiles()
     }
+    
+    func removeRecentFile(filePath: String) {
+        recentFileManager.removeFile(filePath: filePath)
+        loadRecentFiles()
+    }
 }

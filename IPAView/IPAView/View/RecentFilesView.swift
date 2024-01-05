@@ -43,7 +43,7 @@ struct RecentFilesView: View {
         
         // not exist
         print("file not existed : \(filePath)")
-        recentFileManager.removeFile(filePath: filePath)
+        sharedModel.removeRecentFile(filePath: filePath)
         
         sharedModel.showToastMessage("File not existed : \(filePath)")
     }
@@ -51,4 +51,5 @@ struct RecentFilesView: View {
 
 #Preview {
     RecentFilesView()
+        .environmentObject(SharedModel())
 }
