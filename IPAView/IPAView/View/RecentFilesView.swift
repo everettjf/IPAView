@@ -11,15 +11,27 @@ struct RecentFilesView: View {
     @EnvironmentObject var sharedModel: SharedModel
     
     var body: some View {
-        List(sharedModel.recentFiles, id: \.self) { filePath in
-            Text(filePath)
-                .onTapGesture {
-                    handleFileTap(filePath)
-                }
+        VStack {
+            HStack {
+                Text("Recent files")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                Spacer()
+            }
+            .padding(.leading)
+            
+            List(sharedModel.recentFiles, id: \.self) { filePath in
+                Text(filePath)
+                    .onTapGesture {
+                        handleFileTap(filePath)
+                    }
+            }
+            .onAppear(perform: {
+                sharedModel.loadRecentFiles()
+            })
         }
-        .onAppear(perform: {
-            sharedModel.loadRecentFiles()
-        })
+        
+        
     }
     
     private func handleFileTap(_ filePath: String) {

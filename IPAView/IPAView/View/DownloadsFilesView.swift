@@ -12,7 +12,49 @@ struct DownloadsFilesView: View {
 
     
     var body: some View {
-        Text("Hello, World!")
+        VStack {
+            HStack {
+                Text("~/Downloads")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                Spacer()
+            }
+            .padding(.leading)
+            
+            List(sharedModel.filesInDownloads, id:\.self) { fileURL in
+                Text("~/Downloads/\(fileURL.lastPathComponent.removingPercentEncoding ?? fileURL.lastPathComponent)")
+                    .onTapGesture {
+                        handleFileTap(fileURL)
+                    }
+            }
+            .onAppear(perform: {
+                sharedModel.loadUserDownloadsFiles()
+            })
+        }
+    }
+    
+    
+    private func handleFileTap(_ url: URL) {
+        
+        // Define what happens when a file is tapped
+        print("File tapped: \(url)")
+        // For example, open the file or show details
+        
+        if Utils.directoryExists(at: url) {
+            sharedModel.loadInitialPath(dir: url)
+            recentFileManager.addFile(filePath: url.path(percentEncoded: false))
+            return
+        }
+        
+        if Utils.fileExists(at: url) {
+            sharedModel.unzipFile(at: url)
+            recentFileManager.addFile(filePath: url.path(percentEncoded: false))
+            return
+        }
+        
+        // not exist
+        print("file not existed : \(url)")
+        sharedModel.showToastMessage("File not existed : \(url)")
     }
 }
 

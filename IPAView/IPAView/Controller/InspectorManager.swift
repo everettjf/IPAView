@@ -15,6 +15,7 @@ class InspectorManager {
         
         var totalSize: UInt64 = 0
         var extensionSizes: [String: UInt64] = [:]
+        var extensionCount: [String: UInt] = [:]
         var frameworkCount = 0
         var dylibCount = 0
         var fileCount = 0
@@ -65,6 +66,7 @@ class InspectorManager {
                 totalSize += UInt64(fileSize)
                 let fileExtension = fileURL.pathExtension
                 extensionSizes[fileExtension, default: 0] += UInt64(fileSize)
+                extensionCount[fileExtension, default: 0] += 1
             }
         }
         
@@ -78,7 +80,8 @@ class InspectorManager {
         results.append(InspectItemInfo(name: "Total size of all files", value: "\(Utils.formatBytes(totalSize)) (\(totalSize) bytes)"))
         
         for (ext, size) in extensionSizes.sorted(by: {$0.value > $1.value }) {
-            results.append(InspectItemInfo(name: "- Size for .\(ext)", value: Utils.formatBytes(size)))
+            let count = extensionCount[ext] ?? 0
+            results.append(InspectItemInfo(name: "- .\(ext) (\(count))", value: "Size: \(Utils.formatBytes(size))"))
         }
 
         return results
