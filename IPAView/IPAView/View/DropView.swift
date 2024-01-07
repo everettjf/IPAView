@@ -29,6 +29,7 @@ struct DropView: View {
                 }
                 Spacer()
                 
+                Divider()
                 HStack {
                     RecentFilesView()
                     DownloadsFilesView()

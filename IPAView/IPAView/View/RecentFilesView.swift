@@ -17,6 +17,13 @@ struct RecentFilesView: View {
                     .font(.headline)
                     .fontWeight(.bold)
                 Spacer()
+                
+                Button {
+                    sharedModel.loadRecentFiles()
+                } label: {
+                    Label("Reload", systemImage: "arrow.clockwise")
+                }
+                .padding(.trailing)
             }
             .padding(.leading)
             

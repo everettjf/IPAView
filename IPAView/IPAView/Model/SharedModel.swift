@@ -237,9 +237,18 @@ class SharedModel: ObservableObject {
     
     func loadUserDownloadsFiles() {
         DispatchQueue.global().async {
-            let files = Utils.listFilesInUserDownloadsDirectory(fileExtension: "ipa")
+            let result = Utils.listFilesInUserDownloadsDirectory(fileExtension: "ipa")
             DispatchQueue.main.async {
-                self.filesInDownloads = files
+                switch result {
+                case .success(let files):
+                    self.filesInDownloads = files
+                    
+                    UserDefaults.standard.set(true, forKey: "PermissionReadyDownloads")
+                case .failure(let error):
+                    if case .error(let message) = error {
+                        self.showToastMessage(message)
+                    }
+                }
             }
         }
     }

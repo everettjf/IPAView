@@ -18,6 +18,13 @@ struct DownloadsFilesView: View {
                     .font(.headline)
                     .fontWeight(.bold)
                 Spacer()
+                Button {
+                    sharedModel.loadUserDownloadsFiles()
+                } label: {
+                    Label("Load IPA files in ~/Downloads", systemImage: "arrow.clockwise")
+                }
+                .padding(.trailing)
+
             }
             .padding(.leading)
             
@@ -27,10 +34,13 @@ struct DownloadsFilesView: View {
                         handleFileTap(fileURL)
                     }
             }
-            .onAppear(perform: {
-                sharedModel.loadUserDownloadsFiles()
-            })
         }
+        .onAppear(perform: {
+            let permissionReady = UserDefaults.standard.bool(forKey: "PermissionReadyDownloads")
+            if permissionReady {
+                sharedModel.loadUserDownloadsFiles()
+            }
+        })
     }
     
     
