@@ -28,8 +28,13 @@ struct DropView: View {
                     }
                 }
                 Spacer()
-                RecentFilesView()
-                    .frame(maxHeight: 150)
+                
+                Divider()
+                HStack {
+                    RecentFilesView()
+                    DownloadsFilesView()
+                }
+                .frame(maxHeight: 150)
             }
 
             Text(sharedModel.unzipStatus)

@@ -18,6 +18,7 @@
 		D18C36532B410E6C00E5A3D4 /* InspectorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18C36522B410E6C00E5A3D4 /* InspectorManager.swift */; };
 		D18C36552B411EC700E5A3D4 /* InspectItemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18C36542B411EC700E5A3D4 /* InspectItemInfo.swift */; };
 		D18C36582B41222200E5A3D4 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18C36572B41222200E5A3D4 /* Toast.swift */; };
+		D1C383E42B484C0700DF1B46 /* DownloadsFilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C383E32B484C0700DF1B46 /* DownloadsFilesView.swift */; };
 		D1D73E362B37DF1E00F6FEBE /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = D1D73E352B37DF1E00F6FEBE /* ZIPFoundation */; };
 		D1D73E382B37E17C00F6FEBE /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D73E372B37E17C00F6FEBE /* DetailView.swift */; };
 		D1D73E3A2B37E19300F6FEBE /* FileItemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D73E392B37E19300F6FEBE /* FileItemInfo.swift */; };
@@ -43,6 +44,7 @@
 		D18C36542B411EC700E5A3D4 /* InspectItemInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectItemInfo.swift; sourceTree = "<group>"; };
 		D18C36572B41222200E5A3D4 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		D18C36592B41347800E5A3D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D1C383E32B484C0700DF1B46 /* DownloadsFilesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsFilesView.swift; sourceTree = "<group>"; };
 		D1D73E372B37E17C00F6FEBE /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		D1D73E392B37E19300F6FEBE /* FileItemInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileItemInfo.swift; sourceTree = "<group>"; };
 		D1D73E3B2B386F1600F6FEBE /* UnzipManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnzipManager.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				D18C364C2B405CA000E5A3D4 /* NavigationBarView.swift */,
 				D18C364E2B40745B00E5A3D4 /* RecentFilesView.swift */,
 				D18C36502B41091300E5A3D4 /* InspectorView.swift */,
+				D1C383E32B484C0700DF1B46 /* DownloadsFilesView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				D18C36452B40278000E5A3D4 /* ExploreManager.swift in Sources */,
 				D18C36582B41222200E5A3D4 /* Toast.swift in Sources */,
 				D18C36552B411EC700E5A3D4 /* InspectItemInfo.swift in Sources */,
+				D1C383E42B484C0700DF1B46 /* DownloadsFilesView.swift in Sources */,
 				D18C36492B403F7900E5A3D4 /* PropertyView.swift in Sources */,
 				D18C364D2B405CA000E5A3D4 /* NavigationBarView.swift in Sources */,
 				D1D73E3E2B3870DE00F6FEBE /* DropView.swift in Sources */,
@@ -379,7 +383,7 @@
 				CODE_SIGN_ENTITLEMENTS = IPAView/IPAView.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"IPAView/Preview Content\"";
 				DEVELOPMENT_TEAM = YPV49M8592;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -393,7 +397,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.everettjf.ipaview;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -409,7 +413,7 @@
 				CODE_SIGN_ENTITLEMENTS = IPAView/IPAView.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"IPAView/Preview Content\"";
 				DEVELOPMENT_TEAM = YPV49M8592;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -423,7 +427,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.everettjf.ipaview;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -35,11 +35,11 @@ struct DetailView: View {
             }
             .width(30)
             TableColumn("Name", value: \.name)
-                .width(min: 100, ideal: 200)
+                .width(min: 100, ideal: 300)
             TableColumn("Type", value: \.type)
-                .width(min: 100, ideal: 100)
+                .width(min:50, ideal: 100)
             TableColumn("Size", value: \.formattedSize)
-                .width(min: 100, ideal: 100)
+                .width(min:50, ideal: 100)
         }
         .frame(minHeight: 300)
         .contextMenu(forSelectionType: FileItemInfo.ID.self, menu: { items in

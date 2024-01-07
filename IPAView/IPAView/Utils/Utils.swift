@@ -9,6 +9,9 @@ import Foundation
 
 import AppKit
 
+enum UtilsError: Error {
+    case error(String)
+}
 
 
 class Utils {
@@ -129,4 +132,35 @@ class Utils {
             NSWorkspace.shared.open(url)
         }
     }
+    
+    static func getUserDownloadsDirectory() -> URL {
+        let fileManager = FileManager.default
+        let downloadsURL = fileManager.urls(for: .downloadsDirectory, in: .userDomainMask).first!
+        return downloadsURL
+    }
+    
+    static func listFilesInUserDownloadsDirectory(fileExtension: String) -> Result<[URL], UtilsError> {
+        let fileManager = FileManager.default
+        guard let downloadsURL = fileManager.urls(for: .downloadsDirectory, in: .userDomainMask).first else {
+            print("Downloads directory not found.")
+            return .failure(.error("Failed to find Downloads directory"))
+        }
+
+        do {
+            let fileURLs = try fileManager.contentsOfDirectory(atPath: downloadsURL.path)
+            
+            let results:[URL] = fileURLs.compactMap { fileName in
+                let url = downloadsURL.appending(path: fileName)
+                if url.pathExtension.lowercased() != fileExtension.lowercased() {
+                    return nil
+                }
+                return url
+            }
+            return .success(results)
+        } catch {
+            print("Error while enumerating files \(downloadsURL.path): \(error.localizedDescription)")
+            return .failure(.error("Failed to access Downloads directory : \(error.localizedDescription)"))
+        }
+    }
+
 }

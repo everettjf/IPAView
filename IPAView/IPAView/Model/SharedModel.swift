@@ -45,6 +45,7 @@ class SharedModel: ObservableObject {
     
     // recent files
     @Published var recentFiles: [String] = []
+    @Published var filesInDownloads: [URL] = []
     
     // for the initial root url
     var rootUrl: URL = URL(filePath: "")
@@ -221,6 +222,34 @@ class SharedModel: ObservableObject {
     }
     
     func loadRecentFiles() {
-        recentFiles = recentFileManager.getRecentFiles()
+        DispatchQueue.global().async {
+            let files = recentFileManager.getRecentFiles()
+            DispatchQueue.main.async {
+                self.recentFiles = files
+            }
+        }
+    }
+    
+    func removeRecentFile(filePath: String) {
+        recentFileManager.removeFile(filePath: filePath)
+        loadRecentFiles()
+    }
+    
+    func loadUserDownloadsFiles() {
+        DispatchQueue.global().async {
+            let result = Utils.listFilesInUserDownloadsDirectory(fileExtension: "ipa")
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let files):
+                    self.filesInDownloads = files
+                    
+                    UserDefaults.standard.set(true, forKey: "PermissionReadyDownloads")
+                case .failure(let error):
+                    if case .error(let message) = error {
+                        self.showToastMessage(message)
+                    }
+                }
+            }
+        }
     }
 }

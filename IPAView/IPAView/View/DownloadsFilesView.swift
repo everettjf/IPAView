@@ -1,52 +1,54 @@
 //
-//  RecentFilesView.swift
+//  DownloadsFilesView.swift
 //  IPAView
 //
-//  Created by everettjf on 2023/12/30.
+//  Created by everettjf on 2024/1/5.
 //
 
 import SwiftUI
 
-struct RecentFilesView: View {
+struct DownloadsFilesView: View {
     @EnvironmentObject var sharedModel: SharedModel
+
     
     var body: some View {
         VStack {
             HStack {
-                Text("Recent files")
+                Text("~/Downloads")
                     .font(.headline)
                     .fontWeight(.bold)
                 Spacer()
-                
                 Button {
-                    sharedModel.loadRecentFiles()
+                    sharedModel.loadUserDownloadsFiles()
                 } label: {
-                    Label("Reload", systemImage: "arrow.clockwise")
+                    Label("Load IPA files in ~/Downloads", systemImage: "arrow.clockwise")
                 }
                 .padding(.trailing)
+
             }
             .padding(.leading)
             
-            List(sharedModel.recentFiles, id: \.self) { filePath in
-                Text(filePath)
+            List(sharedModel.filesInDownloads, id:\.self) { fileURL in
+                Text("~/Downloads/\(fileURL.lastPathComponent.removingPercentEncoding ?? fileURL.lastPathComponent)")
                     .onTapGesture {
-                        handleFileTap(filePath)
+                        handleFileTap(fileURL)
                     }
             }
-            .onAppear(perform: {
-                sharedModel.loadRecentFiles()
-            })
         }
-        
-        
+        .onAppear(perform: {
+            let permissionReady = UserDefaults.standard.bool(forKey: "PermissionReadyDownloads")
+            if permissionReady {
+                sharedModel.loadUserDownloadsFiles()
+            }
+        })
     }
     
-    private func handleFileTap(_ filePath: String) {
-        // Define what happens when a file is tapped
-        print("File tapped: \(filePath)")
-        // For example, open the file or show details
+    
+    private func handleFileTap(_ url: URL) {
         
-        let url = URL(filePath: filePath)
+        // Define what happens when a file is tapped
+        print("File tapped: \(url)")
+        // For example, open the file or show details
         
         if Utils.directoryExists(at: url) {
             sharedModel.loadInitialPath(dir: url)
@@ -61,14 +63,13 @@ struct RecentFilesView: View {
         }
         
         // not exist
-        print("file not existed : \(filePath)")
-        sharedModel.removeRecentFile(filePath: filePath)
-        
-        sharedModel.showToastMessage("File not existed : \(filePath)")
+        print("file not existed : \(url)")
+        sharedModel.showToastMessage("File not existed : \(url)")
     }
 }
 
 #Preview {
-    RecentFilesView()
+    DownloadsFilesView()
         .environmentObject(SharedModel())
+
 }

@@ -56,7 +56,7 @@ struct ContentView: View {
         .inspectorColumnWidth(min: 100,ideal: 200, max: 500)
         .inspector(isPresented: $sharedModel.showInspector) {
             InspectorView()
-                .inspectorColumnWidth(min: 300, ideal: 400, max: 600)
+                .inspectorColumnWidth(min: 350, ideal: 450, max: 600)
                 .environmentObject(sharedModel)
         }
         .frame(minWidth: 600, idealWidth: 800, maxWidth: .infinity, minHeight: 300, idealHeight: 550, maxHeight: .infinity)

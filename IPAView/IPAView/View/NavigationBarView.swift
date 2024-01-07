@@ -29,14 +29,21 @@ struct FileSystemNavigationBarButton: View {
 struct FileSystemNavigationBarPathComponentView: View {
     let text: String
     let action: () -> Void
+    
+    @State var hover = false
+    
     var body: some View {
         Button {
             action()
         } label: {
             Text(text)
+                .fontWeight(hover ? .bold : .regular)
         }
         .buttonStyle(BorderlessButtonStyle())
         .frame(height:25)
+        .onHover { hover in
+            self.hover = hover
+        }
     }
 }
 
