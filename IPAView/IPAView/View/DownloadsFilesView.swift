@@ -35,12 +35,6 @@ struct DownloadsFilesView: View {
                     }
             }
         }
-        .onAppear(perform: {
-            let permissionReady = UserDefaults.standard.bool(forKey: "PermissionReadyDownloads")
-            if permissionReady {
-                sharedModel.loadUserDownloadsFiles()
-            }
-        })
     }
     
     

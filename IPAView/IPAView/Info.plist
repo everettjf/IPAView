@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSDownloadsFolderUsageDescription</key>
+	<string>This app needs access to the Downloads folder to read ipa files you downloaded. This allows you to easily find and use these ipa files directly from your Downloads folder. This app only list files that have *.ipa file extension in Downloads folder.</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 </dict>

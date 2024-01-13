@@ -242,8 +242,6 @@ class SharedModel: ObservableObject {
                 switch result {
                 case .success(let files):
                     self.filesInDownloads = files
-                    
-                    UserDefaults.standard.set(true, forKey: "PermissionReadyDownloads")
                 case .failure(let error):
                     if case .error(let message) = error {
                         self.showToastMessage(message)
